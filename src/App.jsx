@@ -17,7 +17,11 @@ import { BsStars } from "react-icons/bs";
 import { VscThumbsup } from "react-icons/vsc"; // Import VscThumbsup
 
 const App = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [step, setStep] = useState(1);
 
   const onSubmit = (data) => {
@@ -194,8 +198,14 @@ const App = () => {
                       id="firstName"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="First Name"
-                      {...register("firstName", { required: true })}
+                      {...register("firstName", {
+                       required: "First Name is required", })}
                     />
+                    {errors.firstName && (
+                      <span className="text-red-600 text-sm">
+                        {errors.firstName.message}
+                      </span>
+                    )}
                   </div>
                   <div className="w-full md:w-1/2">
                     <label
@@ -208,13 +218,18 @@ const App = () => {
                       id="lastName"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="Last Name"
-                      {...register("lastName", { required: true })}
+                      {...register("lastName", { required: " Last Name is required ", })}
                     />
+                    {errors.lastName && (
+                      <span className="text-red-600 text-sm">
+                        {errors.lastName.message}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                   <div className="w-full md:w-1/2">
-                    <label
+                  <label
                       htmlFor="email"
                       className="block text-sm font-medium text-gray-700"
                     >
@@ -222,11 +237,22 @@ const App = () => {
                     </label>
                     <input
                       id="email"
-                      className="block w-full p-2 border border-gray-300 rounded mt-1"
                       type="email"
+                      className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="Email"
-                      {...register("email", { required: true })}
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          message: "Invalid email address",
+                        },
+                      })}
                     />
+                    {errors.email && (
+                      <span className="text-red-600 text-sm">
+                        {errors.email.message}
+                      </span>
+                    )}
                   </div>
                   <div className="w-full md:w-1/2">
                     <label
@@ -236,12 +262,22 @@ const App = () => {
                       Phone Number
                     </label>
                     <input
-                      id="phone"
+                      id="phoneNumber"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
-                      type="tel"
                       placeholder="Phone Number"
-                      {...register("phone", { required: true })}
+                      {...register("phoneNumber", {
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Invalid phone number",
+                        },
+                      })}
                     />
+                    {errors.phoneNumber && (
+                      <span className="text-red-600 text-sm">
+                        {errors.phoneNumber.message}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -253,10 +289,17 @@ const App = () => {
                   </label>
                   <input
                     id="address"
-                    className="block w-full p-2 border border-gray-300 rounded mt-1 mb-10"
+                    className="block w-full p-2 border border-gray-300 rounded mt-1"
                     placeholder="Address"
-                    {...register("address", { required: true })}
+                    {...register("address", { 
+                      required: "Address is required",
+                    })}
                   />
+                  {errors.address && (
+                      <span className="text-red-600 text-sm">
+                        {errors.address.message}
+                      </span>
+                    )}
                 </div>
               </div>
             )}
@@ -279,8 +322,15 @@ const App = () => {
                       id="projectName"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="Project Name"
-                      {...register("projectName", { required: true })}
+                      {...register("projectName", {
+                        required: "Project name is required",
+                      })}
                     />
+                    {errors.projectName && (
+                      <span className="text-red-600 text-sm">
+                        {errors.projectName.message}
+                      </span>
+                    )}
                   </div>
                   <div className="w-full md:w-1/2">
                     <label
@@ -293,8 +343,15 @@ const App = () => {
                       id="projectType"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="Project Type"
-                      {...register("projectType", { required: true })}
+                      {...register("projectType", {  
+                        required: "Project type is required",
+                      })}
                     />
+                     {errors.projectType && (
+                      <span className="text-red-600 text-sm">
+                        {errors.projectType.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -310,8 +367,15 @@ const App = () => {
                       id="companyName"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="Company Name"
-                      {...register("companyName", { required: true })}
+                      {...register("companyName", { 
+                        required: "Company name is required", 
+                      })}
                     />
+                     {errors.companyName && (
+                      <span className="text-red-600 text-sm">
+                        {errors.companyName.message}
+                      </span>
+                    )}
                   </div>
                   <div className="w-full md:w-1/2">
                     <label
@@ -324,8 +388,15 @@ const App = () => {
                       id="description"
                       className="block w-full p-2 border border-gray-300 rounded mt-1"
                       placeholder="Description"
-                      {...register("description", { required: true })}
+                      {...register("description", {
+                         required: "Description is required", 
+                        })}
                     />
+                     {errors.description && (
+                      <span className="text-red-600 text-sm">
+                        {errors.description.message}
+                      </span>
+                     )}
                   </div>
                 </div>
 
@@ -338,10 +409,17 @@ const App = () => {
                   </label>
                   <textarea
                     id="message"
-                    className="block w-full p-2 border border-gray-300 rounded mt-1 mb-10"
+                    className="block w-full p-2 border border-gray-300 rounded mt-1 "
                     placeholder="Message"
-                    {...register("message", { required: true })}
+                    {...register("message", {
+                       required: "Message is required",
+                      })}
                   />
+                   {errors.message && (
+                    <span className="text-red-600 text-sm">
+                      {errors.message.message}
+                    </span>
+                   )}
                 </div>
               </div>
             )}
